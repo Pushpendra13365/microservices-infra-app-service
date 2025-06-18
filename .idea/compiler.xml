@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="infra-app-service" />
         <module name="infra-auth-service" />
+        <module name="infra-form-service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="infra-app-service" options="-parameters" />
       <module name="infra-auth-service" options="-parameters" />
+      <module name="infra-form-service" options="-parameters" />
     </option>
   </component>
 </project>
