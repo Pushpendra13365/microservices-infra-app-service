@@ -1,13 +1,7 @@
 package com.infra_app.config;
 
-import com.infra_app.model.District;
-import com.infra_app.model.Gp;
-import com.infra_app.model.Mandal;
-import com.infra_app.model.Zone;
-import com.infra_app.repository.DistrictRepository;
-import com.infra_app.repository.GpRepository;
-import com.infra_app.repository.MandalRepository;
-import com.infra_app.repository.ZoneRepository;
+import com.infra_app.model.*;
+import com.infra_app.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -22,61 +16,48 @@ public class DataInitializer {
     private final DistrictRepository districtRepository;
     private final MandalRepository mandalRepository;
     private final GpRepository gpRepository;
+    private final LocationRepository locationRepository;
 
     @Bean
     public CommandLineRunner loadData(ZoneRepository zoneRepository) {
         return args -> {
 
-            Zone northZone = new Zone();
-            northZone.setName("North Zone");
-            zoneRepository.save(northZone);
+            Zone zoneNorth = zoneRepository.save(new Zone(null, "North Zone"));
+            Zone zoneSouth = zoneRepository.save(new Zone(null, "South Zone"));
+            Zone zoneEast = zoneRepository.save(new Zone(null, "East Zone"));
+            Zone zoneWest = zoneRepository.save(new Zone(null, "West Zone"));
 
-            Zone southZone = new Zone();
-            southZone.setName("South Zone");
-            zoneRepository.save(southZone);
+            District district1 = districtRepository.save(new District(null, zoneNorth, "Lucknow"));
+            District district2 = districtRepository.save(new District(null, zoneNorth, "Kanpur"));
+            District district3 = districtRepository.save(new District(null, zoneSouth, "Hyderabad"));
+            District district4 = districtRepository.save(new District(null, zoneSouth, "Chennai"));
+            District district5 = districtRepository.save(new District(null, zoneEast, "Kolkata"));
+            District district6 = districtRepository.save(new District(null, zoneNorth, "Delhi"));
+            District district7 = districtRepository.save(new District(null, zoneWest, "Mumbai"));
 
-            Zone eastZone = new Zone();
-            eastZone.setName("East Zone");
-            zoneRepository.save(eastZone);
 
-            Zone westZone = new Zone();
-            westZone.setName("West Zone");
-            zoneRepository.save(westZone);
+            Mandal mandal1 = new Mandal(null, district1, "Mohanlalganj");
+            Mandal mandal2 = new Mandal(null, district1, "Badlapur");
+            Mandal mandal3 = new Mandal(null, district3, "Serilingampally");
+            Mandal mandal4 = new Mandal(null, district4, "Tambaram");
+            Mandal mandal5 = new Mandal(null, district7, "Andheri");
 
-            District districtA = new District();
-            districtA.setName("District A");
-            districtA.setZone(northZone);
-            districtRepository.save(districtA);
+            mandalRepository.saveAll(List.of(mandal1, mandal2, mandal3, mandal4, mandal5));
 
-            District districtB = new District();
-            districtB.setName("District B");
-            districtB.setZone(northZone);
-            districtRepository.save(districtB);
+            Gp gp1 = Gp.builder().mandal(mandal1).name("GP LKO 1").code("LKO001").build();
+            Gp gp2 = Gp.builder().mandal(mandal1).name("GP LKO 2").code("LKO002").build();
+            Gp gp3 = Gp.builder().mandal(mandal2).name("GP LKO A1").code("LKO003").build();
+            Gp gp4 = Gp.builder().mandal(mandal3).name("GP HYD 1").code("HYD001").build();
+            Gp gp5 = Gp.builder().mandal(mandal4).name("GP CHN 1").code("CHN001").build();
+            Gp gp6 = Gp.builder().mandal(mandal5).name("GP MUM 1").code("MUM001").build();
 
-            District districtC = new District();
-            districtC.setName("District C");
-            districtC.setZone(southZone);
-            districtRepository.save(districtC);
+            gpRepository.saveAll(List.of(gp1, gp2, gp3, gp4, gp5, gp6));
 
-            District districtD = new District();
-            districtD.setName("District D");
-            districtD.setZone(southZone);
-            districtRepository.save(districtD);
+            Location loc1 = Location.builder().name("Location A").build();
+            Location loc2 = Location.builder().name("Location B").build();
+            Location loc3 = Location.builder().name("Location C").build();
 
-            Mandal mandalA = new Mandal(null, districtA, "Mandal A1");
-            Mandal mandalA2 = new Mandal(null, districtA, "Mandal A2");
-            Mandal mandalB = new Mandal(null, districtB, "Mandal B1");
-            Mandal mandalC = new Mandal(null, districtC, "Mandal C1");
-            Mandal mandalD = new Mandal(null, districtD, "Mandal D1");
-
-            mandalRepository.saveAll(List.of(mandalA, mandalA2, mandalB, mandalC, mandalD));
-
-            Gp gp1 = Gp.builder().mandal(mandalA).name("GP A1").code("GP001").build();
-            Gp gp2 = Gp.builder().mandal(mandalA).name("GP A2").code("GP002").build();
-            Gp gp3 = Gp.builder().mandal(mandalB).name("GP B1").code("GP003").build();
-            Gp gp4 = Gp.builder().mandal(mandalC).name("GP C1").code("GP004").build();
-
-            gpRepository.saveAll(List.of(gp1, gp2, gp3, gp4));
+            locationRepository.saveAll(List.of(loc1, loc2, loc3));
         };
     }
 }

@@ -9,7 +9,7 @@ spring:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_HOST:10.0.16.36}:5432/${DB_NAME:infra_db_dev}?currentSchema=${DB_SCHEMA:user_management}
+    url: jdbc:postgresql://${DB_HOST:10.0.16.36}:5432/${DB_NAME:infra_db_dev}?currentSchema=${DB_SCHEMA:public}
     username: ${DB_USERNAME:pushpendra}
     password: ${DB_PASSWORD:pushpendra_infradbdev#2025}
     driver-class-name: org.postgresql.Driver
