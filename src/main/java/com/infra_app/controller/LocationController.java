@@ -1,6 +1,5 @@
 package com.infra_app.controller;
 
-import com.infra_app.dto.ApiResponse;
 import com.infra_app.dto.LocationDto;
 import com.infra_app.service.LocationService;
 import lombok.RequiredArgsConstructor;

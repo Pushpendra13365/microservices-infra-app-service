@@ -26,6 +26,7 @@ public class DataInitializer {
             Zone zoneSouth = zoneRepository.save(new Zone(null, "South Zone"));
             Zone zoneEast = zoneRepository.save(new Zone(null, "East Zone"));
             Zone zoneWest = zoneRepository.save(new Zone(null, "West Zone"));
+            Zone zoneCentral = zoneRepository.save(new Zone(null, "Central Zone"));
 
             District district1 = districtRepository.save(new District(null, zoneNorth, "Lucknow"));
             District district2 = districtRepository.save(new District(null, zoneNorth, "Kanpur"));

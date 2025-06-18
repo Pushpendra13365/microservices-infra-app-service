@@ -1,6 +1,5 @@
 package com.infra_app.exception;
 
-import com.infra_app.dto.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,7 +21,8 @@ public class GlobalExceptionHandler {
                 .body("Internal server error: " + ex.getMessage());
     }
     @ExceptionHandler(NoDataFoundException.class)
-    public ResponseEntity<ApiResponse<Object>> handleNoDataFound(NoDataFoundException ex) {
-        return ResponseEntity.ok(new ApiResponse<>(false, ex.getMessage(), null));
+    public ResponseEntity<String> handleNoDataFound(NoDataFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("No data found: " + ex.getMessage());
     }
 }
